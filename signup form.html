@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto", sans-serif;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.portal {
+  mix-blend-mode: screen;
+
+  position: absolute;
+}
+.inside {
+  position: absolute;
+}
+
+.inside img {
+  border-radius: 50%;
+}
+button {
+  position: absolute;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+  padding: 10px;
+  border: none;
+  background-color: #202020;
+  color: white;
+  border-radius: 10px;
+  z-index: 5;
+  font-family: "Roboto", sans-serif;
+}
+
+button:hover {
+  transition-duration: 0.3s;
+  transform: scale(1.04);
+  background-color: orange;
+}
+#openportal {
+  opacity: 0;
+}
+
+#local {
+  opacity: 0;
+}
+
+#portalopened {
+  opacity: 0;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="portal">
+    <img id="openportal" src="https://media1.giphy.com/media/cOsbNxEvhkg7D0FPuj/giphy.gif?cid=790b7611f60678d83f37dd03bd315b46f50af5dfa286a946&rid=giphy.gif&ct=g">
+  </div>
+  <img id="portalopened" src="https://media0.giphy.com/media/rKXTdMZuRYCyLcj5vb/giphy.gif?cid=790b761179d9ced2beede5d9e804f694775f11c2b8ce6481&rid=giphy.gif&ct=g">
+</div>
+<div class="inside">
+  <img id="local">
+</div>
+</div>
+<button id="strange">Open Portal</button>
+
+
+</body>
+<script>
+import $ from "https://cdn.skypack.dev/jquery@3.6.0";
+import animejs from "https://cdn.skypack.dev/animejs@3.2.1";
+
+let btn = document.getElementById("strange");
+
+btn.onclick = function () {
+  abrir.play();
+  aberto.play();
+  local.play();
+  second.play();
+};
+
+let abrir = animejs({
+  targets: "#openportal",
+  autoplay: false,
+  keyframes: [{ opacity: 1 }, { opacity: 0, delay: 1500 }]
+});
+
+let aberto = animejs({
+  targets: "#portalopened",
+  autoplay: false,
+  delay: 1800,
+  keyframes: [
+    {
+      opacity: 1
+    }
+  ]
+});
+let local = animejs({
+  targets: "#local",
+  autoplay: false,
+  opacity: 1,
+  easing: "easeOutQuad",
+  delay: 2000,
+  update: function () {
+    $("#local").attr("src", "https://picsum.photos/200");
+  }
+});
+
+let second = animejs({
+  targets: "button",
+  autoplay: false,
+  opacity: 0,
+  delay: 1000,
+  duration: 500,
+  easing: "easeInQuad"
+});
+
+
+</script>
+</html>
